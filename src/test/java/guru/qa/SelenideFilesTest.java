@@ -40,6 +40,7 @@ public class SelenideFilesTest {
       Assertions.assertTrue(dataAsString.contains("Contributions to JUnit are both welcomed and appreciated."));
     }
 
+
   }
 
   @Test
