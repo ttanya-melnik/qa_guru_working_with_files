@@ -14,7 +14,10 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter'
     testImplementation 'com.codeborne:selenide:7.14.0'
     testImplementation 'commons-io:commons-io:2.21.0'
-    testImplementation 'com.codeborne:pdf-test:2.1.0'
+    testImplementation 'com.codeborne:pdf-test:1.5.0'
+    testImplementation 'com.codeborne:xls-test:1.4.3'
+    testImplementation 'com.opencsv:opencsv:5.12.0'
+    testImplementation 'com.google.code.gson:gson:2.13.2'
 }
 
 test {

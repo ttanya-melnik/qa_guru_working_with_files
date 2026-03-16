@@ -7,7 +7,6 @@ import static com.codeborne.selenide.Selenide.open;
 import com.codeborne.selenide.Configuration;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import org.junit.jupiter.api.Assertions;
@@ -27,22 +26,35 @@ public class SelenideFilesTest {
   }
 
 
+
+// тест скачивания файла
+  // метод "download" - Selenide сам скачивает файл по этой ссылке и возвращает объект File
+
   @Test
   void downloadFileTest()  throws Exception {
     open("https://github.com/junit-team/junit5/blob/main/README.md");
     File downloaded =
-        $("[href ='https://github.com/junit-team/junit-framework/raw/refs/heads/main/README.md']")
+        $(".react-blob-header-edit-and-raw-actions [href='https://github.com/junit-team/junit-framework/raw/refs/heads/main/README.md']")
         .download();
+
+    // открываем InputStream
+   //читаем все байты
+   //превращаем в строку
+   //проверяем, что внутри есть определённая фраза
 
     try (InputStream is = new FileInputStream(downloaded)) {
       byte[] data = is.readAllBytes();
       String dataAsString = new String(data, StandardCharsets.UTF_8);
       Assertions.assertTrue(dataAsString.contains("Contributions to JUnit are both welcomed and appreciated."));
     }
-
-
   }
+  //Итог: тест проверяет, что по ссылке «Raw» действительно лежит настоящий README.md
+  // от JUnit и в нём есть ожидаемый текст.
 
+
+
+// тест загрузки файла
+  // Selenide берёт файл cat.png.jpg, который лежит в папке src/test/resources
   @Test
   void uploadFileTest() {
     open("https://fineuploader.com/demos.html");
@@ -50,5 +62,6 @@ public class SelenideFilesTest {
     $(".qq-file-name").shouldHave(text("cat.png.jpg"));
   }
 }
-
+// Проверяем, что в интерфейсе загрузчика появилось имя файла → .shouldHave(text("cat.png.jpg"))
+// тест проверяет, что файл успешно выбран и отобразился в UI загрузчика.
 
